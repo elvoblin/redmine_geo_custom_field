@@ -1,0 +1,8 @@
+<p>
+  <%= label_tag :display_type, l('redmine_geo_custom_field.display') %>
+  <%= select_tag(
+    'custom_field[rgc_display_type]',
+    options_for_select(custom_field.format.display_types, custom_field.rgc_display_type),
+    id: :display_type
+  ) %>
+</p>

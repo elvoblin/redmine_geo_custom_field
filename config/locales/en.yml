@@ -1,0 +1,11 @@
+en:
+  redmine_geo_custom_field:
+    label_for_geo_coords: "Geographic coordinates"
+    latitude: "Latitude"
+    longtitude: "Longtitude"
+    zoom: "Zoom"
+    invalid_coordinates: "invalid coordinates"
+    display: "Display"
+    display_types:
+      string: "Simple string"
+      google_map_website: "Google maps website"

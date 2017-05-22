@@ -1,0 +1,37 @@
+= redmine_geo_custom_field
+
+This is a plugin for Redmine which adds geographical coordinates custom field
+format.
+
+== Installing
+* Clone this repository into +redmine/plugins/redmine_geo_custom_field+
+
+* Restart your Redmine web server.
+
+* Configure custom fields in admin section.
+
+== Configuration
+* Click to administration -> Custom Field -> New custom field
+
+* Select Issues type.
+
+* In open window select format - "Geographic coordinates".
+
+* Enter name of your custom field.
+
+* Option Display - determines how the field value will be displayed.
+
+  * Simple string.
+
+  * Google maps website - open your coordinates in new window with google maps
+    web site.
+
+* Other options are same as in other Custom Fields
+
+== Plans
+* Specify coordinates in modal window.
+
+* Display in modal window.
+
+* Display in html.
+
