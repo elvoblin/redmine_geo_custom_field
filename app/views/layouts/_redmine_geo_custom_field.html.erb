@@ -1,0 +1,6 @@
+<% if "#{params[:controller]}/#{params[:action]}" == "issues/show" %>
+  <%= stylesheet_link_tag :redmine_geo_custom_field, plugin: :redmine_geo_custom_field %>
+  <%= javascript_include_tag RedmineGeoCustomField.gmap_api_url %>
+  <%= javascript_include_tag :redmine_geo_custom_field, plugin: :redmine_geo_custom_field %>
+<% end %>
+

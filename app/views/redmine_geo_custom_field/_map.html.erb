@@ -1,0 +1,15 @@
+<div id="map-<%= cf.id %>" class="geo_custom_field_map"></div>
+
+<%= javascript_tag do %>
+  $(document).ready(function(){
+    var map = RedmineGeoCustomField.initMap('map-<%= cf.id %>', "<%= value %>", 13);
+    RedmineGeoCustomField.placeMarkerInMapCenter(map);
+
+    $("#ajax-modal").on( "dialogopen", function( event, ui ){
+      var center = map.getCenter();
+      google.maps.event.trigger(map, "resize");
+      map.setCenter(center);
+    })
+  });
+<% end -%>
+

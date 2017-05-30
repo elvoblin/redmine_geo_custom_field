@@ -6,6 +6,9 @@ en:
     zoom: "Zoom"
     invalid_coordinates: "invalid coordinates"
     display: "Display"
+    settings:
+      gmap_api_key: "Google map api key"
     display_types:
       string: "Simple string"
       google_map_website: "Google maps website"
+      modal_window: "Modal window"

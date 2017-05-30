@@ -21,11 +21,22 @@ module RedmineGeoCustomField
       def formatted_value(view, custom_field, value, customized=nil, html=false)
         casted = value.to_s
         if html
-          latitude, longtitude = value.split(',').map(&:to_f)
+          return casted if value.blank?
 
           case custom_field.rgc_display_type
+          when "modal_window"
+            view.link_to casted,
+              {
+                controller: :redmine_geo_custom_field,
+                action: :modal_window,
+                format: :js,
+                custom_field_value: value,
+                custom_field_id: custom_field.id
+              },
+              remote: true
           when "google_map_website"
-            return view.link_to casted, "http://maps.google.com/?q=#{latitude},#{longtitude}", target: "_blank"
+            latitude, longtitude = value.split(',').map(&:to_f)
+            view.link_to casted, "http://maps.google.com/?q=#{latitude},#{longtitude}", target: "_blank"
           when "string"
             casted
           else
@@ -39,7 +50,8 @@ module RedmineGeoCustomField
       def display_types
         [
           [l('redmine_geo_custom_field.display_types.string'), 'string'],
-          [l('redmine_geo_custom_field.display_types.google_map_website'), 'google_map_website']
+          [l('redmine_geo_custom_field.display_types.google_map_website'), 'google_map_website'],
+          [l('redmine_geo_custom_field.display_types.modal_window'), 'modal_window']
         ]
       end
 
