@@ -6,9 +6,20 @@ en:
     zoom: "Zoom"
     invalid_coordinates: "invalid coordinates"
     display: "Display"
+    edit_tag: "Edit"
+    default_settings: "Dafault settings"
+    default_latitude: "Latitude"
+    default_longtitude: "Longtitude"
+    default_zoom: "Zoom"
+    select: "select"
+    accept_button: "Accept"
+    clear_button: "Clear"
     settings:
       gmap_api_key: "Google map api key"
     display_types:
       string: "Simple string"
       google_map_website: "Google maps website"
+      modal_window: "Modal window"
+    edit_tag_style:
+      string: "Simple string"
       modal_window: "Modal window"

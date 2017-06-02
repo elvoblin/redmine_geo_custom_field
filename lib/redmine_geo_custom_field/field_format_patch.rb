@@ -2,7 +2,14 @@ module RedmineGeoCustomField
   module FieldFormatPatch
     class GeoCoords < Redmine::FieldFormat::Unbounded
       add 'geo_coords'
-      self.field_attributes :rgc_display_type
+
+      field_attributes :rgc_display_type
+      field_attributes :edit_tag_style
+
+      field_attributes :rgc_default_latitude
+      field_attributes :rgc_default_longtitude
+      field_attributes :rgc_default_zoom
+
       self.form_partial = 'custom_fields/formats/geo_coords'
 
       def label
@@ -28,7 +35,7 @@ module RedmineGeoCustomField
             view.link_to casted,
               {
                 controller: :redmine_geo_custom_field,
-                action: :modal_window,
+                action: :show_modal_window,
                 format: :js,
                 custom_field_value: value,
                 custom_field_id: custom_field.id
@@ -47,11 +54,36 @@ module RedmineGeoCustomField
         end
       end
 
+      def edit_tag(view, tag_id, tag_name, custom_value, options={})
+        if custom_value.custom_field.edit_tag_style == "modal_window"
+          tag = "".html_safe
+          tag << view.hidden_field_tag(tag_name, custom_value.value, options.merge(:id => tag_id))
+          tag << view.link_to(
+            l('redmine_geo_custom_field.select'),
+            remote: true,
+            controller: :redmine_geo_custom_field,
+            action: :edit_modal_window,
+            custom_field_value: custom_value.value,
+            custom_field_id: custom_value.custom_field.id,
+            format: :js
+          )
+        else
+          view.text_field_tag(tag_name, custom_value.value, options.merge(:id => tag_id))
+        end
+      end
+
       def display_types
         [
           [l('redmine_geo_custom_field.display_types.string'), 'string'],
           [l('redmine_geo_custom_field.display_types.google_map_website'), 'google_map_website'],
           [l('redmine_geo_custom_field.display_types.modal_window'), 'modal_window']
+        ]
+      end
+
+      def edit_tag_styles
+        [
+          [l('redmine_geo_custom_field.edit_tag_style.string'), 'string'],
+          [l('redmine_geo_custom_field.edit_tag_style.modal_window'), 'modal_window']
         ]
       end
 

@@ -21,8 +21,8 @@ end
 module RedmineGeoCustomField
   def self.gmap_api_url
     gmap_api_key = Setting[:plugin_redmine_geo_custom_field]['gmap_api_key']
-    url = "https://maps.googleapis.com/maps/api/js"
-    url << "?key=#{gmap_api_key} "if gmap_api_key.present?
+    url = "https://maps.googleapis.com/maps/api/js?libraries=geometry"
+    url << "&key=#{gmap_api_key} "if gmap_api_key.present?
     return url
   end
 end

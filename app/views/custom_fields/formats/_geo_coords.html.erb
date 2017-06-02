@@ -6,3 +6,35 @@
     id: :display_type
   ) %>
 </p>
+<p>
+  <%= label_tag :edit_tag_style, l('redmine_geo_custom_field.edit_tag') %>
+  <%= select_tag(
+    'custom_field[edit_tag_style]',
+    options_for_select(custom_field.format.edit_tag_styles, custom_field.edit_tag_style),
+    id: :edit_tag_style
+  ) %>
+</p>
+<h3><%= l('redmine_geo_custom_field.default_settings') %></h3>
+<p>
+  <%= label_tag :dafault_latitude, (l('redmine_geo_custom_field.default_latitude')) %>
+  <%= number_field_tag(
+    'custom_field[rgc_default_latitude]',
+    custom_field.rgc_default_latitude.to_i
+  ) %>
+</p>
+<p>
+  <%= label_tag :dafault_longtitude, (l('redmine_geo_custom_field.default_longtitude')) %>
+  <%= number_field_tag(
+    'custom_field[rgc_default_longtitude]',
+    custom_field.rgc_default_longtitude.to_i
+  ) %>
+</p>
+<p>
+  <%= label_tag :dafault_zoom, (l('redmine_geo_custom_field.default_zoom')) %>
+  <%= number_field_tag(
+    'custom_field[rgc_default_zoom]',
+    custom_field.rgc_default_zoom.to_i.in?(1..15) ? custom_field.rgc_default_zoom.to_i : 1 ,
+    min: 1,
+    max: 15
+  ) %>
+</p>

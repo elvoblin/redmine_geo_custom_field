@@ -1,0 +1,52 @@
+$('#ajax-modal').html('<div id="map-<%= @cf.id %>" class="geo_custom_field_map"></div><p class="buttons"><%= button_tag l('redmine_geo_custom_field.accept_button'), class: "rgc_accept_button" %><%= button_tag l('redmine_geo_custom_field.clear_button'), class: "rgc_clear_button" %></p');
+
+$(document).ready(function(){
+  var map;
+  var marker;
+  var element;
+  var inputPosition;
+
+  map = RedmineGeoCustomField.initMap('map-<%= @cf.id %>', "<%= @value.present? ? @value : @default_value %>", <%= @cf.rgc_default_zoom %>);
+  marker = new google.maps.Marker({map: map});
+  element = $('#issue_custom_field_values_<%= @cf.id %>');
+  inputPosition = RedmineGeoCustomField.positionFromValue(element.val());
+
+  <% if @value.present? -%>
+    marker.setPosition(map.getCenter());
+  <% end -%>
+
+  // This is hack. if value was changed, but issue wasn't saved
+  if (inputPosition && google.maps.geometry.spherical.computeDistanceBetween(inputPosition, map.getCenter()) > 1 ){
+    map.setCenter(inputPosition);
+    marker.setPosition(inputPosition);
+  }
+
+  map.addListener('click', function(e){
+    marker.setPosition(e.latLng)
+  });
+
+  $('.rgc_accept_button').click(function(){
+    var position = marker.getPosition();
+    if ( position ){
+      var value;
+      value = RedmineGeoCustomField.positonToValue(position);
+      //position.lat() + ", " + position.lng()
+      element.val(value);
+      hideModal();
+    }
+  })
+
+  $('.rgc_clear_button').click(function(){
+    element.val("");
+    hideModal();
+  })
+
+  $("#ajax-modal").on( "dialogopen", function( event, ui ){
+    var center = map.getCenter();
+    google.maps.event.trigger(map, "resize");
+    map.setCenter(center);
+  })
+});
+
+showModal('ajax-modal', '600px', "<%= @cf.name %>");
+

@@ -1,7 +1,0 @@
-$('#ajax-modal').html('<%= escape_javascript(
-  render :partial => 'redmine_geo_custom_field/map',
-  :locals => { cf: @cf, value: @value }
-) %>');
-
-showModal('ajax-modal', '600px', "<%= @cf.name %>");
-
