@@ -26,12 +26,19 @@ format.
   * Google maps website - open your coordinates in new window with google maps
     web site.
 
+  * Modal window - show marker in modal window.
+
+* Option edit
+
+  * Simple string - entering coordinates in text field.
+
+  * Modal window - placing marker in modal window.
+
+* Default settings
+
+  * Latitude and Longtitude - when you use modal window for editing, center of map will be placed to this coordinates.
+
+  * Zoom - zoom of map in modal window.
+
 * Other options are same as in other Custom Fields
-
-== Plans
-* Specify coordinates in modal window.
-
-* Display in modal window.
-
-* Display in html.
 
